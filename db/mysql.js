@@ -1,11 +1,52 @@
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
+const mysql = require('mysql');
+const faker = require('faker');
+
+// Create connection
+const connection = mysql.createConnection({
   host: 'localhost',
 	user: 'vinh',
-	password: 'password'
+	password: 'password',
+	database: 'node_joinus',
 });
 
 connection.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
+});
+
+// faker functions to generate data
+function getEmail() {
+	return faker.internet.email();
+}
+
+function getDate() {
+	return faker.date.recent(10);
+}
+
+// Create fake data
+var data = [
+	[getEmail(), getDate()],
+	[getEmail(), getDate()],
+	[getEmail(), getDate()]
+];
+
+// Create MySQL queries
+// Add users
+// const addUser = 'INSERT INTO users (email, created_at) VALUES ?';
+// connection.query(addUser, [data], function (error, results, fields) {
+// 	if(error) { throw error }
+// });
+
+// Show all users
+const showAllUsers = 'SELECT * FROM users';
+connection.query(showAllUsers, function(error, results, fields) {
+	if(error) { throw error }
+	console.log('Users', results);
+	// console.log('Fields', fields)
+});
+
+
+// End the connection
+connection.end(function(err) {
+  if(err) { throw err }
 });
