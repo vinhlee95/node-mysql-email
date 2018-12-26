@@ -4,10 +4,10 @@ A full-stack web app allows users to register for a new service as well as view 
 ## Installation
 * Create a local MySQL database
 * Change `user` and `database` value in `db/index.js`
-<br>
-`npm install`
-<br>
-`npm run dev`
+```bash
+	npm install
+	npm run dev
+```
 
 ## Tech stack
 ### Back end
