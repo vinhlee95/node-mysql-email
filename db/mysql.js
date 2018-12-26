@@ -37,16 +37,5 @@ var data = [
 // 	if(error) { throw error }
 // });
 
-// Show all users
-const showAllUsers = 'SELECT * FROM users';
-connection.query(showAllUsers, function(error, results, fields) {
-	if(error) { throw error }
-	console.log('Users', results);
-	// console.log('Fields', fields)
-});
-
-
-// End the connection
-connection.end(function(err) {
-  if(err) { throw err }
-});
+// Export SQL connection
+module.exports = connection;
