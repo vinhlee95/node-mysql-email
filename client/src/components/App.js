@@ -9,6 +9,10 @@ class App extends Component {
 	}
 
 	componentDidMount() {
+		this.getUsers();
+	}
+
+	getUsers = () => {
 		const API = process.env.REACT_APP_API;
 		axios.get(API).then(res => {
 			const users = res.data;
@@ -28,7 +32,7 @@ class App extends Component {
 					`We are having ${users.length} users`
 					: null
 				}
-				<Form />
+				<Form updateUserList={this.getUsers} />
 				<UserList users={users} />
       </div>
     );
