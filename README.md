@@ -19,7 +19,6 @@ A full-stack web app allows users to register for a new service as well as view 
 ## Troubleshooting
 ### Error: ER_ACCESS_DENIED_ERROR: Access denied for user 'root'@'localhost' (using password: NO)
 * Create a new user:
-<br>
 ```sql
 	mysql> CREATE USER ‘vinh’@‘localhost' IDENTIFIED BY 'password';
 ```
