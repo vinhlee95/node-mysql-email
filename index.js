@@ -6,6 +6,6 @@ app.use('/', router);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, function(err) {
-	if(err) { throw err }
+	if(err) { throw err };
 	console.log(`App is running on port ${PORT}`)
 })
