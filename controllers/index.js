@@ -10,6 +10,22 @@ function getUsers(req, res) {
 	});
 }
 
+function createUser(req, res) {
+	const CREATE_USER = 'INSERT INTO user SET ?';
+	const user = {
+		email: req.body.email,
+		password: req.body.password,
+	};
+	connection.query(CREATE_USER, user, function(error, result) {
+		if(error) { throw error }
+		console.log(result)
+		const message = {message: 'Success'};
+		res.send(JSON.stringify(message));
+		res.redirect('/');
+	});
+}
+
 module.exports = {
 	getUsers,
+	createUser,
 }
