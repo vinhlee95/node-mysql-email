@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import styled from 'styled-components';
-
-const Table = styled.table`
-	border: 1px solid lightgrey;
-	border-radius: 3px;
-	padding: 10px 10px;
-`
+import { Table } from '../UI';
 
 class UserList extends Component {
 
@@ -16,6 +10,7 @@ class UserList extends Component {
 			<tr key={email}>
 				<td>{email}</td>
 				<td>{moment(created_at).fromNow()}</td>
+				<td>X</td>
 			</tr>
 		)
 	}

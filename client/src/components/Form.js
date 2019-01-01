@@ -1,24 +1,6 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
-
-const Button = styled.button`
-	padding: 5px 5px;
-	border-radius: 3px;
-	border: 1px solid lightgrey;
-	cursor: pointer;
-`
-
-const Input = styled.input`
-	padding: 5px 5px;
-	border-radius: 3px;
-	border: 1px solid lightgrey;
-	margin-right: 5px;
-
-	:focus {
-		outline: none;
-	}
-`
+import { Button, Input } from '../UI';
 
 class Form extends Component {
 	state = {
