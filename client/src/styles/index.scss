@@ -1,2 +1,20 @@
+// SCSS entry point
 
 @import './button';
+@import './user-list';
+@import './variables';
+
+// icon
+i {
+	cursor: pointer;
+}
+
+// input
+input {
+	border: none;
+	padding: 10px 0;
+	border-bottom: $global-border;
+	&:focus {
+		outline: none;
+	}
+}
