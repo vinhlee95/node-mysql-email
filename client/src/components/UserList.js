@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import axios from 'axios';
-import { Table, DeleteButton } from '../UI';
+import { Table } from '../UI';
 
 class UserList extends Component {
 
@@ -17,9 +17,7 @@ class UserList extends Component {
 			<tr key={email}>
 				<td>{email}</td>
 				<td>{moment(created_at).fromNow()}</td>
-				<DeleteButton
-					onClick={() => this.deleteUser(email)}
-				>X</DeleteButton>
+				<i className="material-icons material-icons-outlined" onClick={() => this.deleteUser(email)}>delete</i>
 			</tr>
 		)
 	}

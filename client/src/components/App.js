@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Form from './Form';
 import axios from 'axios';
 import UserList from './UserList';
+import '../styles/index.scss';
 
 class App extends Component {
 	state = {
