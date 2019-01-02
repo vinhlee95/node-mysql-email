@@ -1,4 +1,5 @@
 const connection = require('../db');
+const crypto = require('crypto');
 
 function getUsers(req, res) {
 	const GET_USERS = 'SELECT * FROM users';
@@ -13,6 +14,7 @@ function createUser(req, res) {
 	const CREATE_USER = 'INSERT INTO users SET ?';
 	const user = {
 		email: req.body.email,
+		id: crypto.randomBytes(20).toString('hex'),
 	};
 	connection.query(CREATE_USER, user, function(error, result) {
 		if(error) { throw error }
@@ -30,8 +32,14 @@ function deleteUser(req, res) {
 	});
 }
 
+function updateUser(req, res) {
+	const { email, id } = req.body;
+	const UPDATE_USER = `UPDATE users SET email = ? WHERE id = ?`;
+}
+
 module.exports = {
 	getUsers,
 	createUser,
 	deleteUser,
+	updateUser,
 }
