@@ -9,6 +9,15 @@ i {
 	cursor: pointer;
 }
 
+.delete-icon {
+	color: red;
+	margin-right: 5px;
+}
+
+.edit-icon {
+	color: rgb(11, 105, 117);
+}
+
 // input
 input {
 	border: none;
@@ -17,4 +26,11 @@ input {
 	&:focus {
 		outline: none;
 	}
+}
+
+// table
+table {
+	border: 1px solid lightgrey;
+	border-radius: 3px;
+	padding: 10px 10px;
 }

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import axios from 'axios';
-import { Table } from '../UI';
+
+import {
+	Icon
+} from '../UI';
 
 class UserList extends Component {
 	constructor(props) {
@@ -9,6 +12,7 @@ class UserList extends Component {
 		this.state = {
 			users: null,
 			editingUser: null,
+			editingEmail: '',
 		}
 	}
 
@@ -23,22 +27,9 @@ class UserList extends Component {
 		return this.state.editingUser.email === email;
 	};
 
-	editEmail = event => {
-		event.preventDefault();
-		const { users, editingUser } = this.state;
-		const index = users.indexOf(editingUser)
-		const newEmail = event.target.value;
-		const updatedUser = {
-			...editingUser,
-			email: newEmail
-		};
-		const updatedUsers = [...users];
-		updatedUsers.splice(index, 1, updatedUser);
-		this.setState({
-			editingUser: updatedUser,
-			users: updatedUsers
-		})
-	}
+	cancelEditing = () => this.setState({ editingUser: null });
+
+	editEmail = event => this.setState({ editingEmail: event.target.value })
 
 	deleteUser = (email) => {
 		axios.delete(`${process.env.REACT_APP_API}/delete`, { data: {email} }).then(res => {
@@ -46,7 +37,22 @@ class UserList extends Component {
 		}).catch(err => console.log(err))
 	}
 
-	editUser = (user) => this.setState({ editingUser: user });
+	editUser = (user) => this.setState({
+		editingUser: user,
+		editingEmail: user.email
+	});
+
+	updateUser = () => {
+	}
+
+	renderEditingButtons = () => {
+		return(
+			<div>
+				<Icon name='done' onClick={this.updateUser} />
+				<Icon name='cancel' onClick={this.cancelEditing} />
+			</div>
+		)
+	}
 
 	renderUser = user => {
 		const { email, created_at } = user;
@@ -56,34 +62,19 @@ class UserList extends Component {
 					this.isUserEditing(email) ?
 					<input
 						type='text'
-						autoFocus
-						value={this.state.editingUser.email}
+						value={this.state.editingEmail}
 						onChange={this.editEmail}
 					/> :
 					<td>{email}</td>
 				}
 				<td>{moment(created_at).fromNow()}</td>
 				<div className='icons-container'>
-					<i
-						className="material-icons delete-icon"
-						onClick={() => this.deleteUser(email)}
-					>
-						delete
-					</i>
-					<i
-						className="material-icons edit-icon"
-						onClick={() => this.editUser(user)}
-					>
-						edit
-					</i>
+					<Icon name='delete' className='delete-icon' onClick={() => this.deleteUser(email)} />
+					<Icon name='edit' className='edit-icon' onClick={() => this.editUser(user)} />
 					{
 						this.isUserEditing(email) ?
-						<i
-							className='material-icons done-button'
-						>
-							done
-						</i>
-						: null
+						this.renderEditingButtons() :
+						null
 					}
 				</div>
 			</tr>
@@ -96,7 +87,7 @@ class UserList extends Component {
 		return (
 			<div className='user-info-container'>
 				<h2>Users information</h2>
-				<Table>
+				<table>
 					<tbody>
 						<tr>
 							<th>Email</th>
@@ -107,7 +98,7 @@ class UserList extends Component {
 							users.map(user => this.renderUser(user))
 						}
 					</tbody>
-				</Table>
+				</table>
 			</div>
 		)
 	}

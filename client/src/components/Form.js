@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Input } from '../UI';
 
 class Form extends Component {
 	state = {
@@ -27,17 +26,17 @@ class Form extends Component {
 	render() {
 		return (
 			<form onSubmit={this.submitUser}>
-				<Input
+				<input
 					placeholder='Enter your email'
 					value={this.state.email}
 					onChange={this.handleChange}
 				/>
-				<Button
+				<button
 					type='submit'
 					onClick={this.submitUser}
 				>
 					Join now
-				</Button>
+				</button>
 			</form>
 		)
 	}
