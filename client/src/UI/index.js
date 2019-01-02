@@ -18,8 +18,21 @@ export const Button = styled.button`
 	cursor: pointer;
 `
 
+export const DeleteButton = styled.button`
+	padding: 10px 10px;
+	border-radius: 50%;
+	color: #fff;
+	background: red;
+	cursor: pointer;
+
+	:hover {
+		background: orange;
+	}
+`
+
 export const Table = styled.table`
 	border: 1px solid lightgrey;
 	border-radius: 3px;
 	padding: 10px 10px;
 `;
+

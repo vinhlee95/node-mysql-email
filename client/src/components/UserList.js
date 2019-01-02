@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { Table } from '../UI';
+import { Table, DeleteButton } from '../UI';
 
 class UserList extends Component {
 
@@ -10,7 +10,7 @@ class UserList extends Component {
 			<tr key={email}>
 				<td>{email}</td>
 				<td>{moment(created_at).fromNow()}</td>
-				<td>X</td>
+				<DeleteButton>X</DeleteButton>
 			</tr>
 		)
 	}
