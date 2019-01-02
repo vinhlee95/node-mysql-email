@@ -4,6 +4,7 @@ const router = express();
 const {
 	getUsers,
 	createUser,
+	deleteUser
 } = require('../controllers');
 
 router.get('/', function(req, res) {
@@ -13,5 +14,9 @@ router.get('/', function(req, res) {
 router.post('/register', function(req, res) {
 	createUser(req, res);
 });
+
+router.delete('/delete', function(req, res) {
+	deleteUser(req, res);
+})
 
 module.exports = router;

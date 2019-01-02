@@ -21,7 +21,17 @@ function createUser(req, res) {
 	});
 }
 
+function deleteUser(req, res) {
+	const DELETE_USER = `DELETE FROM users WHERE email = ?`;
+	const {email} = req.body;
+	connection.query(DELETE_USER, email, function(error, result) {
+		if(error) { throw error };
+		res.send('Successfully deleted user');
+	});
+}
+
 module.exports = {
 	getUsers,
 	createUser,
+	deleteUser,
 }

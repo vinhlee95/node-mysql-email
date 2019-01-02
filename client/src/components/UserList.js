@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import axios from 'axios';
 import { Table, DeleteButton } from '../UI';
 
 class UserList extends Component {
+
+	deleteUser = (email) => {
+		axios.delete(`${process.env.REACT_APP_API}/delete`, { data: {email} }).then(res => {
+			this.props.updateUserList();
+		}).catch(err => console.log(err))
+	}
 
 	renderUser = user => {
 		const { email, created_at } = user;
@@ -10,7 +17,9 @@ class UserList extends Component {
 			<tr key={email}>
 				<td>{email}</td>
 				<td>{moment(created_at).fromNow()}</td>
-				<DeleteButton>X</DeleteButton>
+				<DeleteButton
+					onClick={() => this.deleteUser(email)}
+				>X</DeleteButton>
 			</tr>
 		)
 	}

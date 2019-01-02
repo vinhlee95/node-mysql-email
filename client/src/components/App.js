@@ -33,7 +33,7 @@ class App extends Component {
 					: null
 				}
 				<Form updateUserList={this.getUsers} />
-				<UserList users={users} />
+				<UserList users={users} updateUserList={this.getUsers} />
       </div>
     );
   }
