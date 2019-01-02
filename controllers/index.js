@@ -35,6 +35,10 @@ function deleteUser(req, res) {
 function updateUser(req, res) {
 	const { email, id } = req.body;
 	const UPDATE_USER = `UPDATE users SET email = ? WHERE id = ?`;
+	connection.query(UPDATE_USER, [email, id], function(error, result) {
+		if(error) { throw error };
+		res.send(`Successfully updated user with email ${email}`);
+	});
 }
 
 module.exports = {

@@ -42,23 +42,28 @@ class UserList extends Component {
 		editingEmail: user.email
 	});
 
-	updateUser = () => {
-
+	updateUser = (id) => {
+		const { editingEmail } = this.state;
+		axios.post(`${process.env.REACT_APP_API}/update`, {id, email:editingEmail})
+			.then(res => {
+				this.props.updateUserList();
+			})
+			.catch(err => console.log(err));
 	}
 
-	renderEditingButtons = () => {
+	renderEditingButtons = (id) => {
 		return(
 			<div>
-				<Icon name='done' onClick={this.updateUser} />
+				<Icon name='done' onClick={() => this.updateUser(id)} />
 				<Icon name='cancel' onClick={this.cancelEditing} />
 			</div>
 		)
 	}
 
 	renderUser = user => {
-		const { email, created_at } = user;
+		const { id, email, created_at } = user;
 		return(
-			<tr key={email} className='user-item-container'>
+			<tr key={id} className='user-item-container'>
 				{
 					this.isUserEditing(email) ?
 					<input
@@ -74,7 +79,7 @@ class UserList extends Component {
 					<Icon name='edit' className='edit-icon' onClick={() => this.editUser(user)} />
 					{
 						this.isUserEditing(email) ?
-						this.renderEditingButtons() :
+						this.renderEditingButtons(id) :
 						null
 					}
 				</div>
