@@ -41,9 +41,19 @@ function updateUser(req, res) {
 	});
 }
 
+function filterUser(req, res) {
+	const { type } = req.body;
+	const FILTER_USER = `SELECT * FROM users WHERE created_at between date_sub(now(), INTERVAL 1 ${type.toUpperCase()}) and now();`;
+	connection.query(FILTER_USER, function(error, result) {
+		if(error) { throw error };
+		res.send(JSON.stringify(result));
+	})
+}
+
 module.exports = {
 	getUsers,
 	createUser,
 	deleteUser,
 	updateUser,
+	filterUser,
 }

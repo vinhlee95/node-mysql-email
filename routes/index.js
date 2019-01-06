@@ -6,6 +6,7 @@ const {
 	createUser,
 	deleteUser,
 	updateUser,
+	filterUser,
 } = require('../controllers');
 
 router.get('/', function(req, res) {
@@ -22,6 +23,10 @@ router.delete('/delete', function(req, res) {
 
 router.post('/update', function(req, res) {
 	updateUser(req, res);
+})
+
+router.post('/filter', function(req, res) {
+	filterUser(req, res);
 })
 
 module.exports = router;

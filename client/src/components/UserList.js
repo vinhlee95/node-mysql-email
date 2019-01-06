@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import axios from 'axios';
 
+import Filter from './Filter';
 import {
 	Icon
 } from '../UI';
@@ -16,10 +17,10 @@ class UserList extends Component {
 		}
 	}
 
-	componentDidUpdate(prevProps) {
+	componentDidUpdate(prevProps, prevState) {
 		if(prevProps.users !== this.props.users) {
 			this.setState({ users: this.props.users })
-		}
+		};
 	}
 
 	isUserEditing = (email) => {
@@ -30,6 +31,11 @@ class UserList extends Component {
 	cancelEditing = () => this.setState({ editingUser: null });
 
 	editEmail = event => this.setState({ editingEmail: event.target.value })
+
+	updateUsers = (users) => {
+		console.log(users)
+		this.setState({ users });
+	};
 
 	deleteUser = (email) => {
 		axios.delete(`${process.env.REACT_APP_API}/delete`, { data: {email} }).then(res => {
@@ -89,10 +95,10 @@ class UserList extends Component {
 
 	render() {
 		const { users } = this.state;
-		if(!users) { return null };
 		return (
 			<div className='user-info-container'>
 				<h2>Users information</h2>
+				<Filter updateUsers={this.updateUsers} />
 				<table>
 					<tbody>
 						<tr>
@@ -100,8 +106,9 @@ class UserList extends Component {
 							<th>Join from</th>
 						</tr>
 						{
-							users.length > 0 &&
+							users && users.length > 0 ?
 							users.map(user => this.renderUser(user))
+							: null
 						}
 					</tbody>
 				</table>
