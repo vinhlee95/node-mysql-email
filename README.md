@@ -9,6 +9,11 @@ A full-stack web app allows users to register for a new service as well as view 
 	npm run dev
 ```
 
+## API Route testing
+```bash
+	npm run test-server
+```
+
 ## Tech stack
 ### Back end
 * MySQL
