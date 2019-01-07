@@ -10,7 +10,7 @@ describe('GET /', function () {
 			.set('Accept', 'application/json')
 			.end(function(err, res) {
 				expect(res.statusCode).to.equal(200);
-				expect(res.body).length.to.have.lengthOf(5);
+				expect(res.body).length.to.be.a('array');
 				done();
 			});
 	});
@@ -26,7 +26,6 @@ describe('POST /', function() {
 			.set('Accept', 'application/json')
 			.send(newUser)
 			.end(function(err, res) {
-				console.log(res.body)
 				expect(res.statusCode).to.equal(200);
 				expect(res.body.user.email).to.equal(newUser.email);
 				done();
