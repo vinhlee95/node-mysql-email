@@ -12,8 +12,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(router);
 
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 4002;
 app.listen(PORT, function(error) {
 	if(error) { throw error };
 	console.log(`App is running on port ${PORT}`)
 })
+
+module.exports = app;
